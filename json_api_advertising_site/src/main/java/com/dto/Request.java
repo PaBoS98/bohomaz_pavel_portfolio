@@ -18,13 +18,7 @@ public class Request {
         preparedStatement.setString(2, ad.getDescription());
         preparedStatement.setInt(3, ad.getPrice());
         preparedStatement.executeUpdate();
-        Statement statement = Main.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet resultSet = statement.executeQuery("select id from ads");
-        int id = 1;
-        if (resultSet.last()) {
-            id = resultSet.getInt("id");
-        }
-        addLinks(id, ad.getLinksPhoto());
+        addLinks(getLastId(), ad.getLinksPhoto());
     }
 
     private static void addLinks(int id, String[] links) throws SQLException {
@@ -34,5 +28,15 @@ public class Request {
         preparedStatement.setString(3, links[1]);
         preparedStatement.setString(4, links[2]);
         preparedStatement.executeUpdate();
+    }
+
+    public static int getLastId() throws SQLException {
+        Statement statement = Main.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = statement.executeQuery("select id from ads");
+        int id = 1;
+        if (resultSet.last()) {
+            id = resultSet.getInt("id");
+        }
+        return id;
     }
 }
