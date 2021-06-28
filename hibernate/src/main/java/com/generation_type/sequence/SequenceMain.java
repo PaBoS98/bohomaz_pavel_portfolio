@@ -9,7 +9,7 @@ import javax.persistence.Query;
 public class SequenceMain {
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+       session.beginTransaction();
 
         Sequence sequence;
         for (int i = 0; i < 5; i++) {
