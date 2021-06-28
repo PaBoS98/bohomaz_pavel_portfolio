@@ -2,11 +2,11 @@ package com.patterns.Structural.proxy;
 
 import java.util.List;
 
-public class PileOfPapersProxy implements PileOfPapers {
+public final class PileOfPapersProxy implements PileOfPapers {
     private PileOfPapersReal pileOfPapersReal;
-    private List<String> papers;
+    private final List<String> papers;
 
-    public PileOfPapersProxy(List<String> papers) {
+    public PileOfPapersProxy(final List<String> papers) {
         this.papers = papers;
         System.out.println("Документы рядом на столе и ждут своей участи");
     }
@@ -23,4 +23,5 @@ public class PileOfPapersProxy implements PileOfPapers {
         if (this.pileOfPapersReal != null) return true;
         return false;
     }
+
 }

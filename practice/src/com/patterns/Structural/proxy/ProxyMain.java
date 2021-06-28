@@ -13,6 +13,6 @@ public class ProxyMain {
 
         PileOfPapers pileOfPapers = new PileOfPapersProxy(papers);
 
-//        pileOfPapers.signing();
+        pileOfPapers.signing();
     }
 }

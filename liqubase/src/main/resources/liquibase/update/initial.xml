@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog-1.0.xml" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="initialTables" author="p.bohomaz">
+        <createTable tableName="comment">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="changing_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="comment" type="VARCHAR(255)"/>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="creator_id" type="bigint"/>
+            <column name="owner_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="department">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="feedback">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="changing_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="company_quality" type="integer"/>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="difficulties_on_project" type="VARCHAR(255)"/>
+            <column name="feed_back_from_project" type="VARCHAR(255)"/>
+            <column name="general_difficulties" type="VARCHAR(255)"/>
+            <column name="goals" type="VARCHAR(255)"/>
+            <column name="personal_feedback" type="VARCHAR(255)"/>
+            <column name="project" type="VARCHAR(255)"/>
+            <column name="project_quality" type="integer"/>
+            <column name="report" type="VARCHAR(255)"/>
+            <column name="report_hr" type="VARCHAR(255)"/>
+            <column name="report_rm" type="VARCHAR(255)"/>
+            <column name="risk_of_leaving" type="VARCHAR(255)"/>
+            <column name="score" type="bigint"/>
+            <column name="creator_id" type="bigint"/>
+            <column name="owner_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="job">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="task_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="jwt_token">
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="status" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="news">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="changing_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="filename" type="VARCHAR(255)"/>
+            <column name="news" type="VARCHAR(255)"/>
+            <column name="creator_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="notification">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="minutes" type="integer"/>
+        </createTable>
+
+        <createTable tableName="parameters">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="value" type="integer"/>
+        </createTable>
+
+        <createTable tableName="permissions">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="role_permissions">
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="permission_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="roles">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="priority" type="integer"/>
+        </createTable>
+
+        <createTable tableName="task">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="calendar_id" type="VARCHAR(255)"/>
+            <column name="changing_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="event_id" type="VARCHAR(255)"/>
+            <column name="event_start" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="summary" type="VARCHAR(255)"/>
+            <column name="creator_id" type="bigint"/>
+            <column name="feedback_id" type="bigint"/>
+            <column name="owner_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="task_notification">
+            <column name="task_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notification_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="user_authentication_details">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="account_locked" type="boolean"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="count_of_failed_attempts" type="integer"/>
+            <column name="lock_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="usr">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="calendar" type="VARCHAR(255)"/>
+            <column name="changing_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="creationdate" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="filename" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="chief_id" type="bigint"/>
+            <column name="department_id" type="bigint"/>
+            <column name="role_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="addForeignKey" author="p.bohomaz">
+        <addForeignKeyConstraint  baseColumnNames="owner_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="comment"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_comment.owner_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="creator_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="comment"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_comment.creator_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="owner_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="feedback"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_feedback.owner_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="creator_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="feedback"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_feedback.creator_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="task_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="job"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_job.task.id-task.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="task"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="creator_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="news"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_news.creator_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="permission_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="role_permissions"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_role_permissions.permission_id-permission.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="permissions"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="role_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="role_permissions"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_role_permissions.role_id-roles.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="roles"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="owner_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="task"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_task.owner_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="feedback_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="task"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_task.feedback_id-feedback.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="feedback"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="creator_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="task"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_task.creator_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="notification_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="task_notification"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_task_notification.notification_id-notification.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="notification"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="task_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="task_notification"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_task_notification.task_id-task.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="task"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="user_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="user_authentication_details"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_user_authentication_details.user_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="chief_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="usr"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_usr.chief_id-usr.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="usr"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="role_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="usr"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_usr.role_id-roles.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="roles"
+                                  referencedTableSchemaName="public"/>
+
+        <addForeignKeyConstraint  baseColumnNames="department_id"
+                                  baseTableCatalogName="rmn"
+                                  baseTableName="usr"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_usr.department_id-department.id"
+                                  onDelete="NO ACTION"
+                                  onUpdate="NO ACTION"
+                                  referencedColumnNames="id"
+                                  referencedTableCatalogName="rmn"
+                                  referencedTableName="department"
+                                  referencedTableSchemaName="public"/>
+    </changeSet>
+
+</databaseChangeLog>

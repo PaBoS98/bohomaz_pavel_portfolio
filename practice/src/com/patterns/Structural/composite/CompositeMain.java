@@ -10,7 +10,7 @@ public class CompositeMain {
 
     public static void main(String[] args) {
 
-        String rootDir = "D:\\Pasha\\Junior\\MY\\bohomaz_pavel_portfolio";
+        String rootDir = "D:\\Pasha\\IdeaProjects\\bohomaz_pavel_portfolio\\practice";
         File f = new File(rootDir);
         dir = new Directory(f.getName(), "");
 

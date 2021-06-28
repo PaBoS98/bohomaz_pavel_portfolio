@@ -4,6 +4,7 @@ import com.o2m.dto.HibernateUtil;
 import com.o2m.entity.Person;
 import com.o2m.entity.Product;
 import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -5,6 +5,8 @@ import com.generation_type.sequence.config.HibernateUtil;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class SequenceMain {
     public static void main(String[] args) {
